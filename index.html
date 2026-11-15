@@ -265,7 +265,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
    <p class="mute" style="max-width:54ch">I've designed superconducting qubit chips, built low-noise electronics for trapped-ion experiments, and trained machine-learning models on quantum data.</p>
   </div>
   <button class="portrait" id="portrait" type="button" aria-pressed="false" aria-label="Measure: show my photo">
-   <img src="img/portrait.jpg" alt="Shreyansh standing with arms crossed on a lawn above a lake, under a cloudy sky" width="1800" height="1200">
+   <img src="portrait.jpg" alt="Shreyansh standing with arms crossed on a lawn above a lake, under a cloudy sky" width="1800" height="1200">
    <canvas aria-hidden="true"></canvas>
    <span class="phint" aria-hidden="true">Click to measure</span>
   </button>
@@ -344,8 +344,8 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
  <div class="wrap">
   <div class="vh"><span class="ket" aria-hidden="true">|4⟩</span><h1 id="h1-pur" tabindex="-1">Other pursuits</h1></div>
   <div class="fly rv">
-   <img class="t" src="img/takeoff-s.jpg" alt="Silhouette of Shreyansh at the end of a runway as a jet takes off overhead" loading="lazy">
-   <img class="w" src="img/concorde-s.jpg" alt="Shreyansh in front of a British Airways Concorde at the Museum of Flight" loading="lazy">
+   <img class="t" src="takeoff-s.jpg" alt="Silhouette of Shreyansh at the end of a runway as a jet takes off overhead" loading="lazy">
+   <img class="w" src="concorde-s.jpg" alt="Shreyansh in front of a British Airways Concorde at the Museum of Flight" loading="lazy">
    <div class="txt">
     <h2 style="margin-bottom:12px">Aviation</h2>
     <p class="mute">The longest-running obsession. 100+ hours flying in Microsoft Flight Simulator, and any excuse to stand at the end of a runway.</p>
@@ -430,7 +430,7 @@ const PH=[
  ['apron-night','Air India at night']
 ];
 const gal=$('#gal');
-gal.innerHTML=PH.map(([k,c],i)=>`<button class="ph" type="button" data-i="${i}"><img src="img/${k}-s.jpg" alt="${c}" decoding="async"><span class="cap" aria-hidden="true">${c}</span></button>`).join('');
+gal.innerHTML=PH.map(([k,c],i)=>`<button class="ph" type="button" data-i="${i}"><img src="${k}-s.jpg" alt="${c}" decoding="async"><span class="cap" aria-hidden="true">${c}</span></button>`).join('');
 const seenObs='IntersectionObserver' in window&&!RM?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen');seenObs.unobserve(e.target)}}),{rootMargin:'0px 0px -5% 0px'}):null;
 $$('.ph').forEach((b,i)=>{const im=b.querySelector('img');const go=()=>setTimeout(()=>b.classList.add('seen'),Math.min(i,8)*70);(im.complete&&im.naturalWidth)?go():im.addEventListener('load',go,{once:true});im.addEventListener('error',()=>b.classList.add('seen'),{once:true});b.addEventListener('click',()=>openLB(+b.dataset.i,b))});
 setTimeout(()=>$$('.ph').forEach(b=>b.classList.add('seen')),4000);
@@ -440,7 +440,7 @@ function fitRect(nw,nh){const mw=Math.min(1300,innerWidth-32),mh=innerHeight*.8,
 function rings(x,y){if(RM)return;for(let k=0;k<4;k++){const r=document.createElement('div');r.className='ring';r.style.left=x+'px';r.style.top=y+'px';document.body.appendChild(r);
  const R=(300+k*140);r.animate([{width:'10px',height:'10px',marginLeft:'-5px',marginTop:'-5px',opacity:.9},{width:R*2+'px',height:R*2+'px',marginLeft:-R+'px',marginTop:-R+'px',opacity:0}],{duration:1100+k*150,delay:k*110,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=()=>r.remove()}}
 function setInfo(){lbi.alt=PH[li][1];$('#lbc').textContent=PH[li][1];$('#lbn').textContent=`|${li+1}⟩ of ${PH.length}`}
-function loadFull(){const k=li,full=new Image();full.src=`img/${PH[k][0]}.jpg`;full.decode?.().then(()=>{if(k===li)lbi.src=full.src}).catch(()=>{if(k===li)lbi.src=full.src})}
+function loadFull(){const k=li,full=new Image();full.src=`${PH[k][0]}.jpg`;full.decode?.().then(()=>{if(k===li)lbi.src=full.src}).catch(()=>{if(k===li)lbi.src=full.src})}
 function sizeTo(nw,nh){const r=fitRect(nw,nh);lbi.style.width=r.w+'px';lbi.style.height=r.h+'px'}
 function openLB(i,f){
  if(lb.classList.contains('open')){step(i-li);return}
