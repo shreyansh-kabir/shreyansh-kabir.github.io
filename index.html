@@ -37,7 +37,7 @@ p{margin:0 0 1em}
 /* top bar + well nav */
 .top{position:fixed;inset:0 0 auto;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px max(5vw,20px);background:linear-gradient(var(--bg) 55%,rgba(11,11,13,0))}
 .brand{font:400 24px/1 "EB Garamond",Garamond,"Times New Roman",serif;text-decoration:none;white-space:nowrap;padding:10px 0}
-.wells{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:min(600px,62vw)}
+.wells{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));width:min(860px,70vw)}
 .wells canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .wells a{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:56px;padding-top:6px;text-decoration:none;font-size:16px;color:var(--mute);transition:color .3s;white-space:nowrap}
 .wells a span{font:italic 15px/1 "EB Garamond",Garamond,"Times New Roman",serif;opacity:.8;margin-bottom:3px}
@@ -46,10 +46,13 @@ p{margin:0 0 1em}
 @media(max-width:760px){
  .top{background:var(--bg);padding-block:8px}
  .wells{position:fixed;left:0;right:0;bottom:0;width:auto;background:rgba(11,11,13,.96);border-top:1px solid var(--line);padding:0 6px env(safe-area-inset-bottom)}
- .wells a{font-size:15px;min-height:58px}
+ .wells a{font-size:13px;min-height:58px;padding-inline:2px}
+ .wells a span{font-size:13px}
  .wells .lg{display:none}
 }
-@media(min-width:761px){.wells .sm{display:none}}
+@media(min-width:1180px){.wells .sm{display:none}}
+@media(max-width:1179px){.wells .lg{display:none}}
+@media(min-width:761px) and (max-width:1000px){.wells a{font-size:14px}.brand{font-size:20px}}
 
 /* views */
 main{min-height:100svh}
@@ -66,9 +69,9 @@ main{min-height:100svh}
 /* tunneling overlay */
 #tun{position:fixed;inset:0;z-index:40;pointer-events:none;width:100%;height:100%;opacity:0}
 #tunlbl{position:fixed;left:50%;bottom:clamp(90px,14vh,140px);transform:translateX(-50%);z-index:41;font-size:16px;color:var(--mute);opacity:0;pointer-events:none;white-space:nowrap}
-main.out{opacity:0;filter:blur(6px);transform:translateX(-24px);transition:opacity .35s ease,transform .35s ease,filter .35s ease}
+main.out{opacity:0;filter:blur(8px);transform:translateX(40px) scaleX(.97);transition:opacity .35s ease,transform .35s ease,filter .35s ease}
 main.in{animation:emerge .7s cubic-bezier(.2,.7,.2,1)}
-@keyframes emerge{from{opacity:0;transform:translateX(24px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+@keyframes emerge{from{opacity:0;transform:translateX(-30px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
 
 /* about */
 .about{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(36px,6vw,96px);align-items:center}
@@ -174,6 +177,24 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 @media(max-width:520px){.figs{grid-template-columns:minmax(0,1fr)}.rgrid b{font-size:26px}}
 @media(prefers-reduced-motion:reduce){.ch{opacity:1;transition:none}}
 
+/* experience + projects */
+.xh{font-size:clamp(26px,2.6vw,34px);margin:0 0 14px}
+.xh+.xp{margin-bottom:clamp(48px,6vw,80px)}
+.xp{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.xp li{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);gap:24px;padding:18px 0;border-bottom:1px solid var(--line);position:relative}
+.xp .d{color:var(--mute);font-size:17px;white-space:nowrap;padding-top:2px}
+.xp b{display:block;font-weight:500;font-size:21px}
+.xp i{display:block;color:var(--acc);font-size:18px}
+.xp p{margin:4px 0 0;color:#cfcfd6;font-size:18px}
+.pj{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pc{display:flex;flex-direction:column;text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:22px;background:rgba(18,18,21,.75);transition:border-color .3s,transform .3s}
+.pc:hover{border-color:var(--acc);transform:translateY(-3px)}
+.pc svg{width:100%;height:80px;margin-bottom:16px;fill:none;stroke:var(--acc);stroke-width:1.3;opacity:.85}
+.pc .tg{font-size:16px;color:var(--mute)}
+.pc h3{font-size:clamp(24px,2.2vw,30px);margin:4px 0 8px}
+.pc p{color:#cfcfd6;font-size:18px;margin:0 0 16px;flex:1}
+.pc .go{color:var(--acc);font-size:17px}
+@media(max-width:760px){.pj{grid-template-columns:minmax(0,1fr)}.xp li{grid-template-columns:minmax(0,1fr);gap:2px}}
 /* photography */
 .gal{columns:3 280px;column-gap:14px}
 .ph{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:var(--bg2);cursor:zoom-in;break-inside:avoid;position:relative;overflow:hidden;border-radius:3px;color:inherit}
@@ -243,9 +264,11 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
    <canvas id="wcv" aria-hidden="true"></canvas>
    <a href="#about"><span aria-hidden="true">|1⟩</span>About</a>
    <a href="#research"><span aria-hidden="true">|2⟩</span>Research</a>
-   <a href="#photography"><span aria-hidden="true">|3⟩</span><b class="lg" style="font-weight:inherit">Photography</b><b class="sm" style="font-weight:inherit">Photos</b></a>
-   <a href="#pursuits"><span aria-hidden="true">|4⟩</span><b class="lg" style="font-weight:inherit">Other pursuits</b><b class="sm" style="font-weight:inherit">Pursuits</b></a>
-   <a href="#contact"><span aria-hidden="true">|5⟩</span>Contact</a>
+   <a href="#experience"><span aria-hidden="true">|3⟩</span><b class="lg" style="font-weight:inherit">Experience</b><b class="sm" style="font-weight:inherit">Exp.</b></a>
+   <a href="#projects"><span aria-hidden="true">|4⟩</span>Projects</a>
+   <a href="#photography"><span aria-hidden="true">|5⟩</span><b class="lg" style="font-weight:inherit">Photography</b><b class="sm" style="font-weight:inherit">Photos</b></a>
+   <a href="#pursuits"><span aria-hidden="true">|6⟩</span><b class="lg" style="font-weight:inherit">Other pursuits</b><b class="sm" style="font-weight:inherit">Pursuits</b></a>
+   <a href="#contact"><span aria-hidden="true">|7⟩</span>Contact</a>
   </div>
  </nav>
 </header>
@@ -310,7 +333,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <div><b>310 MHz</b><span>anharmonicity</span></div>
       <div><b>48</b><span>E<sub>J</sub>/E<sub>C</sub></span></div>
       <div><b>16</b><span>resonator geometries simulated</span></div>
-      <div><b>1–2 M</b><span>coupling Q mapped</span></div>
+      <div><b>2.5×10⁵–2.5×10⁶</b><span>coupling Q range mapped</span></div>
       <div><b>8</b><span>resonator mask designed</span></div>
       <div><b>5×</b><span>smaller fractal resonators, in progress</span></div>
      </div>
@@ -325,24 +348,69 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   </div>
 
   <div class="skills rv" style="margin-top:40px"><span>Qiskit Metal</span><span>SQDMetal</span><span>PALACE</span><span>Ansys EDT</span><span>Python</span><span>Qiskit</span><span>RF and microwave design</span></div>
-  <div class="next"><span>Presented to the lab, Aug 2026</span><a href="#photography"><span class="ket">|3⟩</span> Photography →</a></div>
+  <div class="next"><span>Presented to the lab, Aug 2026</span><a href="#experience"><span class="ket">|3⟩</span> Experience →</a></div>
+ </div>
+</section>
+
+<!-- |3> EXPERIENCE -->
+<section class="view" data-view="experience" data-title="Experience, Shreyansh Kabir" aria-labelledby="h1-exp" hidden>
+ <div class="wrap">
+  <div class="vh"><span class="ket" aria-hidden="true">|3⟩</span><h1 id="h1-exp" tabindex="-1">Experience</h1></div>
+  <h2 class="xh rv">Research and industry</h2>
+  <ol class="xp rv">
+   <li><span class="d">May 2026 – now</span><div><b>Jena-Xing Lab, Cornell</b><i>Undergraduate Researcher</i><p>Superconducting transmon chip design and EM simulation.</p></div></li>
+   <li><span class="d">2026</span><div><b>Handshake AI</b><i>Project Touchstone, Electrical Engineering</i><p>Wrote expert-level circuit tasks and LTspice solutions to train AI models.</p></div></li>
+   <li><span class="d">Jun – Aug 2025</span><div><b>Katz Lab, Cornell</b><i>Undergraduate Researcher</i><p>Low-noise filter boards for an FPGA-controlled ion trap.</p></div></li>
+   <li><span class="d">2024 – 2025</span><div><b>Quantum Computing Association, Cornell</b><i>Hardware, optics subteam</i><p>Optics for a room-temperature quantum memory.</p></div></li>
+   <li><span class="d">Jun – Oct 2022</span><div><b>Cambridge Centre for International Research</b><i>Research Scholar</i><p>Quantum machine learning and cryptography.</p></div></li>
+  </ol>
+  <h2 class="xh rv">Teaching and mentoring</h2>
+  <ol class="xp rv">
+   <li><span class="d">Jun 2026 – now</span><div><b>Learning Strategies Center, Cornell</b><i>Course Assistant</i><p>Review sessions and study-skills workshops.</p></div></li>
+   <li><span class="d">Feb 2024 – now</span><div><b>Student-Athlete Support Services, Cornell</b><i>Tutor</i><p>Weekly physics and calculus.</p></div></li>
+   <li><span class="d">2024, 2025</span><div><b>PREPARE, Cornell</b><i>International orientation mentor</i><p>100+ incoming international students.</p></div></li>
+   <li><span class="d">Summer 2024</span><div><b>Tomujin Academy, Mongolia</b><i>Apprentice Teacher</i><p>English and math for 100+ students.</p></div></li>
+  </ol>
+  <div class="next"><span>&nbsp;</span><a href="#projects"><span class="ket">|4⟩</span> Projects →</a></div>
+ </div>
+</section>
+
+<!-- |4> PROJECTS -->
+<section class="view" data-view="projects" data-title="Projects, Shreyansh Kabir" aria-labelledby="h1-proj" hidden>
+ <div class="wrap">
+  <div class="vh"><span class="ket" aria-hidden="true">|4⟩</span><h1 id="h1-proj" tabindex="-1">Projects</h1></div>
+  <div class="pj">
+   <a class="pc rv" href="transmon-report.pdf" target="_blank" rel="noopener">
+    <svg viewBox="0 0 200 90" aria-hidden="true"><line x1="0" y1="20" x2="200" y2="20"/><path d="M40 28 v8 h120 v10 h-120 v10 h120 v10 h-120 v10 h60"/><rect x="92" y="72" width="16" height="12"/></svg>
+    <span class="tg">Research report · 2026</span><h3>Transmon chips: design and EM simulation</h3><p>Q<sub>c</sub> mapped from 2.5×10⁵ to 2.5×10⁶; dispersive shift swept 6.9 kHz – 5.2 MHz; simulation matched a fabricated chip with R² > 0.98.</p><span class="go">Read the report (PDF) ↗</span></a>
+   <a class="pc rv" href="https://iquhack.superquantum.io/" target="_blank" rel="noopener">
+    <svg viewBox="0 0 200 90" aria-hidden="true"><line x1="0" y1="25" x2="200" y2="25"/><line x1="0" y1="50" x2="200" y2="50"/><line x1="0" y1="75" x2="200" y2="75"/><rect x="24" y="15" width="20" height="20"/><rect x="70" y="40" width="20" height="20"/><circle cx="125" cy="25" r="4"/><line x1="125" y1="25" x2="125" y2="75"/><circle cx="125" cy="75" r="9"/><rect x="160" y="15" width="20" height="20"/></svg>
+    <span class="tg">MIT iQuHACK 2026 · Superquantum · 3rd place</span><h3>Clifford+T circuit compilation</h3><p>Compiled few-qubit unitaries into Clifford+T circuits with the fewest possible T gates.</p><span class="go">Challenge site ↗</span></a>
+   <a class="pc rv" href="moodys-qtda.html" target="_blank" rel="noopener">
+    <svg viewBox="0 0 200 90" aria-hidden="true"><path d="M0 70 L20 60 L35 64 L55 45 L70 50 L90 30 L105 38 L120 20 L135 58 L150 74 L170 66 L200 72"/><line x1="20" y1="84" x2="120" y2="84"/><line x1="55" y1="78" x2="150" y2="78"/></svg>
+    <span class="tg">MIT iQuHACK 2025 · Moody's</span><h3>Quantum TDA for market crashes</h3><p>Betti numbers from quantum phase estimation, as early-warning signals on 2008 S&amp;P 500 data.</p><span class="go">View the notebook ↗</span></a>
+   <a class="pc rv" href="bloch-irreps.pdf" target="_blank" rel="noopener">
+    <svg viewBox="0 0 200 90" aria-hidden="true"><path d="M10 80 Q55 78 90 52"/><path d="M110 52 Q145 78 190 80"/><path d="M10 10 Q55 12 90 36"/><path d="M110 36 Q145 12 190 10"/><line x1="100" y1="5" x2="100" y2="88" stroke-dasharray="3 4"/></svg>
+    <span class="tg">AEP 5510 final project</span><h3>Bloch functions as irreps of the translation group</h3><p>Bloch's theorem from group theory, and why band gaps must open at the zone boundary.</p><span class="go">Read the paper (PDF) ↗</span></a>
+  </div>
+  <div class="next"><span>&nbsp;</span><a href="#photography"><span class="ket">|5⟩</span> Photography →</a></div>
  </div>
 </section>
 
 <!-- |3> PHOTOGRAPHY -->
 <section class="view" data-view="photography" data-title="Photography, Shreyansh Kabir" aria-labelledby="h1-photo" hidden>
  <div class="wrap">
-  <div class="vh"><span class="ket" aria-hidden="true">|3⟩</span><h1 id="h1-photo" tabindex="-1">Photography</h1></div>
+  <div class="vh"><span class="ket" aria-hidden="true">|5⟩</span><h1 id="h1-photo" tabindex="-1">Photography</h1></div>
   <p class="lede" style="margin-bottom:clamp(32px,4vw,52px)">Sunsets, stages and cities after dark. I also shoot portraits and events.</p>
   <div class="gal" id="gal"></div>
-  <div class="next"><span>All photos mine</span><a href="#pursuits"><span class="ket">|4⟩</span> Other pursuits →</a></div>
+  <div class="next"><span>All photos mine</span><a href="#pursuits"><span class="ket">|6⟩</span> Other pursuits →</a></div>
  </div>
 </section>
 
 <!-- |4> OTHER PURSUITS -->
 <section class="view" data-view="pursuits" data-title="Other pursuits, Shreyansh Kabir" aria-labelledby="h1-pur" hidden>
  <div class="wrap">
-  <div class="vh"><span class="ket" aria-hidden="true">|4⟩</span><h1 id="h1-pur" tabindex="-1">Other pursuits</h1></div>
+  <div class="vh"><span class="ket" aria-hidden="true">|6⟩</span><h1 id="h1-pur" tabindex="-1">Other pursuits</h1></div>
   <div class="fly rv">
    <img class="t" src="takeoff-s.jpg" alt="Silhouette of Shreyansh at the end of a runway as a jet takes off overhead" loading="lazy">
    <img class="w" src="concorde-s.jpg" alt="Shreyansh in front of a British Airways Concorde at the Museum of Flight" loading="lazy">
@@ -358,14 +426,14 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
    <div><svg viewBox="0 0 52 52" aria-hidden="true"><path class="draw" d="M21 27 C13 25 6 31 8 39 C10 47 20 49 25 43 C28 39 27 35 30 33 C34 30 34 25 30 23 C27 21 24 25 21 27 Z"/><path class="draw" d="M24 34 L44 8 M41 6 L47 11"/><circle class="draw" cx="19" cy="37" r="3"/></svg><h3>Guitar</h3><p>Playing guitar, mostly when the simulations are running.</p></div>
   </div>
   <p class="also rv"><b>Fun fact:</b> I can apply physics in real life too, by spinning expensive laptops on my fingertip.</p>
-  <div class="next"><span>&nbsp;</span><a href="#contact"><span class="ket">|5⟩</span> Contact →</a></div>
+  <div class="next"><span>&nbsp;</span><a href="#contact"><span class="ket">|7⟩</span> Contact →</a></div>
  </div>
 </section>
 
 <!-- |5> CONTACT -->
 <section class="view" data-view="contact" data-title="Contact, Shreyansh Kabir" aria-labelledby="h1-contact" hidden>
  <div class="wrap">
-  <div class="vh"><span class="ket" aria-hidden="true">|5⟩</span><h1 id="h1-contact" tabindex="-1">Contact</h1></div>
+  <div class="vh"><span class="ket" aria-hidden="true">|7⟩</span><h1 id="h1-contact" tabindex="-1">Contact</h1></div>
   <a class="mail" href="mailto:sk2827@cornell.edu">sk2827@cornell.edu</a>
   <div class="cl"><a class="btn" href="https://www.linkedin.com/in/shreykabir/" target="_blank" rel="noopener">LinkedIn<span class="sr"> (opens in a new tab)</span>&nbsp;↗</a><button class="btn" id="copy" type="button">Copy email</button><span id="copied" role="status" class="mute" style="font-size:17px"></span></div>
   <svg class="gs" id="gs" aria-hidden="true"></svg>
@@ -488,15 +556,15 @@ $$('.pur svg .draw').forEach(p=>{try{p.style.setProperty('--l',Math.ceil(p.getTo
 
 /* ---------- well nav ---------- */
 const wells=$('#wells'),wcv=$('#wcv'),wctx=wcv.getContext('2d'),links=$$('.wells a');
-const NAMES=['about','research','photography','pursuits','contact'];
+const NAMES=['about','research','experience','projects','photography','pursuits','contact'];
 let pos=0,anim=null; // pos = continuous well index of the wavepacket
 function wsize(){const d=Math.min(2,devicePixelRatio||1);wcv.width=wcv.clientWidth*d;wcv.height=wcv.clientHeight*d;wctx.setTransform(d,0,0,d,0,0);wdraw()}
 function wdraw(){
  const W=wcv.clientWidth,H=wcv.clientHeight;if(!W)return;wctx.clearRect(0,0,W,H);
- const cw=W/5,base=H-5,top=H-18;
+ const cw=W/7,base=H-5,top=H-18;
  // potential: flat wells with thin barriers
  wctx.strokeStyle='#4a4a52';wctx.lineWidth=1;wctx.beginPath();wctx.moveTo(0,top);wctx.lineTo(0,base);
- for(let i=1;i<5;i++){const x=i*cw;wctx.lineTo(x-2,base);wctx.lineTo(x-2,top);wctx.lineTo(x+2,top);wctx.lineTo(x+2,base)}
+ for(let i=1;i<7;i++){const x=i*cw;wctx.lineTo(x-2,base);wctx.lineTo(x-2,top);wctx.lineTo(x+2,top);wctx.lineTo(x+2,base)}
  wctx.lineTo(W,base);wctx.lineTo(W,top);wctx.stroke();
  // |psi|^2: hump centred at pos, dips while inside a barrier, with exponential tails into neighbours
  const c=(pos+.5)*cw,frac=pos-Math.floor(pos),near=Math.min(frac,1-frac),amp=.35+.65*Math.min(1,near*3.2)**.6,sig=cw*(.16+.18*(1-Math.min(1,near*3.2)));
@@ -519,22 +587,28 @@ const tun=$('#tun'),tctx=tun.getContext('2d'),tl=$('#tunlbl'),main=$('#main');
 function tsize(){const d=Math.min(2,devicePixelRatio||1);tun.width=innerWidth*d;tun.height=innerHeight*d;tctx.setTransform(d,0,0,d,0,0)}
 function tunnel(onMid,label){
  return new Promise(res=>{
-  tsize();const W=innerWidth,H=innerHeight,y0=H*.5,xl=W*.48,xr=W*.52,k=24/W*Math.PI*2,kap=7/(xr-xl),T=Math.exp(-kap*(xr-xl))*3.2,sig=W*.09,A=Math.min(150,H*.2);
-  tl.textContent=label;let mid=false;const t0=performance.now(),D=1250;
-  const step=n=>{const t=Math.min(1,(n-t0)/D),x0=-W*.15+t*W*1.3,ph=n/90;
-   tun.style.opacity=t<.12?t/.12:t>.88?(1-t)/.12:1;tl.style.opacity=tun.style.opacity*.9;
+  tsize();const W=innerWidth,H=innerHeight,y0=H*.56,bw=Math.max(26,W*.05),xl=W*.5-bw/2,xr=W*.5+bw/2,A=Math.min(150,H*.19),BH=A*1.55;
+  const sig=W*.075,k=2*Math.PI/Math.max(34,W/26),r=.72,tr=.52,kap=Math.log(1/tr)/bw;
+  tl.textContent=label;let mid=false;const t0=performance.now(),D=1650;
+  const env=(x,c)=>Math.exp(-((x-c)**2)/(2*sig*sig));
+  const step=n=>{const t=Math.min(1,(n-t0)/D),x0=-W*.18+t*(W*1.36),ph=n/80;
+   tun.style.opacity=t<.1?t/.1:t>.9?(1-t)/.1:1;tl.style.opacity=tun.style.opacity*.9;
    tctx.clearRect(0,0,W,H);
-   // barrier
-   tctx.fillStyle='rgba(236,236,239,.05)';tctx.fillRect(xl,y0-A*1.6,xr-xl,A*3.2);
-   tctx.strokeStyle='rgba(236,236,239,.35)';tctx.lineWidth=1;tctx.strokeRect(xl+.5,y0-A*1.6,xr-xl-1,A*3.2);
-   tctx.beginPath();tctx.moveTo(0,y0);tctx.lineTo(W,y0);tctx.strokeStyle='rgba(236,236,239,.10)';tctx.stroke();
-   // incident packet travels freely; once past the barrier only a decayed, transmitted copy remains
-   const passed=x0>xr;const env=x=>Math.exp(-((x-x0)**2)/(2*sig*sig));
-   const amp=x=>{if(x<xl)return passed?.22:1;if(x<=xr)return passed?Math.max(T,Math.exp(-kap*(x-xl))):Math.exp(-kap*(x-xl));return passed?T:Math.exp(-kap*(xr-xl))};
-   const f=x=>{const ex=x<=xr||passed?env(x):env(xr)*Math.exp(-(x-xr)*.02);return ex*amp(x)};
-   tctx.beginPath();for(let x=0;x<=W;x+=2){const a=f(x)*A;tctx.lineTo(x,y0-a*a/A)}tctx.lineTo(W,y0);tctx.lineTo(0,y0);tctx.closePath();tctx.fillStyle='rgba(159,195,255,.16)';tctx.fill();
-   tctx.beginPath();for(let x=0;x<=W;x+=2){const y=y0-f(x)*A*Math.cos(k*x-ph);x?tctx.lineTo(x,y):tctx.moveTo(x,y)}tctx.strokeStyle=ACC;tctx.lineWidth=1.6;tctx.stroke();
-   if(!mid&&x0>W*.5){mid=true;onMid()}
+   // incident + reflected (mirror about xl), evanescent inside, transmitted beyond
+   const xR=2*xl-x0,xT=x0+bw;
+   const psi=x=>{
+    if(x<xl){const a=x0<=xl?env(x,x0):0,b=x0>xl-3*sig?r*env(x,xR):0;return[a*Math.cos(k*x-ph)+b*Math.cos(-k*x-ph+Math.PI),a*Math.sin(k*x-ph)+b*Math.sin(-k*x-ph+Math.PI)]}
+    if(x<=xr){const e=env(xl,x0)*(1+r)*.6;const d=e*Math.exp(-kap*(x-xl));return[d*Math.cos(k*xl-ph),d*Math.sin(k*xl-ph)]}
+    const a=tr*env(x,xT);return[a*Math.cos(k*x-ph),a*Math.sin(k*x-ph)]};
+   // ground line and barrier
+   tctx.strokeStyle='rgba(236,236,239,.14)';tctx.lineWidth=1;tctx.beginPath();tctx.moveTo(0,y0);tctx.lineTo(W,y0);tctx.stroke();
+   const g=tctx.createLinearGradient(xl,0,xr,0);g.addColorStop(0,'rgba(236,236,239,.16)');g.addColorStop(.5,'rgba(236,236,239,.07)');g.addColorStop(1,'rgba(236,236,239,.16)');
+   tctx.fillStyle=g;tctx.fillRect(xl,y0-BH,bw,BH);tctx.strokeStyle='rgba(236,236,239,.55)';tctx.beginPath();tctx.moveTo(xl,y0);tctx.lineTo(xl,y0-BH);tctx.lineTo(xr,y0-BH);tctx.lineTo(xr,y0);tctx.stroke();
+   tctx.font='italic 17px "EB Garamond",Garamond,serif';tctx.fillStyle=MUTE;tctx.textAlign='center';tctx.fillText('V₀',W/2,y0-BH-10);
+   // |psi|^2 fill and Re psi
+   tctx.beginPath();tctx.moveTo(0,y0);for(let x=0;x<=W;x+=2){const[a,b]=psi(x);tctx.lineTo(x,y0-(a*a+b*b)*A*.9)}tctx.lineTo(W,y0);tctx.closePath();tctx.fillStyle='rgba(159,195,255,.18)';tctx.fill();
+   tctx.beginPath();for(let x=0;x<=W;x+=2){const y=y0-psi(x)[0]*A;x?tctx.lineTo(x,y):tctx.moveTo(x,y)}tctx.strokeStyle=ACC;tctx.lineWidth=1.7;tctx.stroke();
+   if(!mid&&xT-2*sig>xr){mid=true;onMid()}
    if(t<1)requestAnimationFrame(step);else{tun.style.opacity=0;tl.style.opacity=0;res()}};
   requestAnimationFrame(step);
  });
@@ -551,8 +625,8 @@ async function go(name,user){
  if(!NAMES.includes(name))name='about';if(name===cur||busy)return;
  const i=NAMES.indexOf(name);
  if(!user||RM||cur===null){show(name);moveTo(i,0);if(user)focusH(name);return}
- busy=true;moveTo(i,1250);main.classList.remove('in');main.classList.add('out');
- const lbl=['About','Research','Photography','Other pursuits','Contact'][i];
+ busy=true;moveTo(i,1650);main.classList.remove('in');main.classList.add('out');
+ const lbl=['About','Research','Experience','Projects','Photography','Other pursuits','Contact'][i];
  await tunnel(()=>{show(name);main.classList.remove('out');void main.offsetWidth;main.classList.add('in')},`tunneling to |${i+1}⟩ ${lbl}`);
  busy=false;focusH(name);
  if(location.hash.slice(1)!==cur)go(location.hash.slice(1),true);
